@@ -4,5 +4,4 @@ __pycache__/
 *.pyd
 request_logs.json
 venv/
-.env
 .gitignore
