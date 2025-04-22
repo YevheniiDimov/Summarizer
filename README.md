@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ---
 
-🏁 Running the App
+## 🏁 Running the App
 To start the FastAPI server locally:
 
 ```bash
@@ -44,3 +44,19 @@ uvicorn main:app --reload
 ```
 
 Visit the docs at http://127.0.0.1:8000/docs for interactive API testing.
+
+---
+
+## 🐋 Docker
+
+You can also build the docker-image:
+```bash
+docker build -t Summarizer .
+```
+
+And run it:
+```bash
+docker run -d -p 8000:8000 text-summarizer
+```
+
+Your app will be available at: http://localhost:8000
