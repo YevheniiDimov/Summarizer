@@ -1,27 +1,36 @@
-from huggingface_hub import InferenceClient
 from models import SummarizeRequest, SummarizeResponse
+from fastapi import HTTPException
 from dotenv import load_dotenv
+import requests
+import json
 import os
 
 
 # Load API Token from the .env file
 load_dotenv()
-API_TOKEN = os.getenv('huggingface-token')
+MODEL_API_TOKEN = os.getenv('model-api-token')
+MODEL_API_URL = os.getenv('openai-compatible-model-url')
 
-client = InferenceClient(
-    provider="novita",
-    api_key=API_TOKEN,
-)
 
 def summarize_text(request: SummarizeRequest) -> SummarizeResponse:
-    completion = client.chat.completions.create(
-        model=request.model,
-        messages=[
+    body = {
+        "model": request.model,
+        "messages": [
             {
-                "role": "user",
+                "role": "system", 
                 "content": "Summarize the following text: " + request.text
             }
         ],
-    )
+        "max_tokens": 500,
+    }
 
-    return SummarizeResponse(http_response=completion.choices[0].finish_reason, text=completion.choices[0].message)
+    if MODEL_API_TOKEN != None:
+        body.update({"api-key": MODEL_API_TOKEN})
+
+    response = requests.post(MODEL_API_URL + "/chat/completions", json=body)
+    result = json.loads(response.text)
+
+    try:
+        return SummarizeResponse(http_response=str(response.status_code), text=result["choices"][0]["message"]["content"])
+    except KeyError:
+        raise HTTPException(status_code=500, detail="Error: your model does not require an API key, set it to \"None\"")

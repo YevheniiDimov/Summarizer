@@ -2,7 +2,7 @@ from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
 from models import SummarizeRequest, SummarizeResponse
-from summarizer import summarize_text, SummarizeResult
+from summarizer import summarize_text
 
 
 # Initialize FastAPI server

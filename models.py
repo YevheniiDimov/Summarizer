@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class SummarizeRequest(BaseModel):
     text: str
-    model: str = "deepseek-ai/DeepSeek-V3-0324"
+    model: str = "Nous Hermes 2 Mistral 7B DPO"
 
 class SummarizeResponse(BaseModel):
     http_response: str
