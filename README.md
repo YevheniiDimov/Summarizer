@@ -56,7 +56,7 @@ docker build -t summarizer .
 
 And run it:
 ```bash
-docker run -d -p 8000:8000 text-summarizer
+docker run -d -p 8000:8000 summarizer
 ```
 
 Your app will be available at: http://localhost:8000
