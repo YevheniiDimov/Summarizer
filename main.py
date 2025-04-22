@@ -13,7 +13,7 @@ app = FastAPI()
 def read_root():
     return {
         "Message": "Hello, this is a microservice that allows you to summarize a text!",
-        "Routes": "GET / - This message\nPOST {\"text\": \"*\", \"model\": \"*\" (deepseek-ai/DeepSeek-V3-0324 is default)} to /summarize - summarizes a text for you"
+        "Routes": "GET / - This message\nPOST {\"text\": \"*\", \"model\": \"*\" (optional), \"limit\": * (500 is default, optional), \"temperature\": * (0.7 is default, optional)} to /summarize - summarizes a text for you"
     }
 
 @app.post("/summarize")

@@ -21,7 +21,8 @@ def summarize_text(request: SummarizeRequest) -> SummarizeResponse:
                 "content": "Summarize the following text: " + request.text
             }
         ],
-        "max_tokens": 500,
+        "max_tokens": request.limit,
+        "temperature": request.temperature
     }
 
     if MODEL_API_TOKEN != None:
