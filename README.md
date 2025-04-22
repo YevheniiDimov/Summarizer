@@ -51,7 +51,7 @@ Visit the docs at http://127.0.0.1:8000/docs for interactive API testing.
 
 You can also build the docker-image:
 ```bash
-docker build -t Summarizer .
+docker build -t summarizer .
 ```
 
 And run it:
